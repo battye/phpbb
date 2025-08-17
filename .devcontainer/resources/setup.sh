@@ -2,8 +2,8 @@
 # Commands to install and configure phpBB
 
 # Start MySQL
-echo "[Codespaces] Start MySQL"
-sudo service mysql start
+# echo "[Codespaces] Start MySQL"
+# sudo service mysql start
 
 # Start Apache
 echo "[Codespaces] Start Apache"
@@ -14,12 +14,12 @@ echo "[Codespaces] Add SSH key"
 echo "$SSH_KEY" > /home/vscode/.ssh/id_rsa && chmod 600 /home/vscode/.ssh/id_rsa
 
 # Create a MySQL user to use
-echo "[Codespaces] Create MySQL user"
-sudo mysql -u root<<EOFMYSQL
-    CREATE USER 'phpbb'@'localhost' IDENTIFIED BY 'phpbb';
-    GRANT ALL PRIVILEGES ON *.* TO 'phpbb'@'localhost' WITH GRANT OPTION;
-    CREATE DATABASE IF NOT EXISTS phpbb;
-EOFMYSQL
+# echo "[Codespaces] Create MySQL user"
+# sudo mysql -u root<<EOFMYSQL
+#    CREATE USER 'phpbb'@'localhost' IDENTIFIED BY 'phpbb';
+#    GRANT ALL PRIVILEGES ON *.* TO 'phpbb'@'localhost' WITH GRANT OPTION;
+#    CREATE DATABASE IF NOT EXISTS phpbb;
+# EOFMYSQL
 
 # Download dependencies
 echo "[Codespaces] Install Composer dependencies"

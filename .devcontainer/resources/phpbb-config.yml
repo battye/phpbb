@@ -11,7 +11,7 @@ installer:
 
     database:
         dbms: mysqli
-        dbhost: 127.0.0.1
+        dbhost: phpbb_db
         dbport: 3306
         dbuser: phpbb
         dbpasswd: phpbb

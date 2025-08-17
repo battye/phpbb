@@ -1,0 +1,27 @@
+services:
+  phpbb_app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: phpbb_app
+    ports:
+      - "80:80"
+    volumes:
+      - .:/workspaces/phpbb
+    depends_on:
+      - phpbb_db
+
+  phpbb_db:
+    image: mariadb:10.5
+    container_name: phpbb_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: phpbb
+      MYSQL_DATABASE: phpbb
+      MYSQL_USER: phpbb
+      MYSQL_PASSWORD: phpbb
+    volumes:
+      - phpbb_db_data:/var/lib/mysql
+
+volumes:
+  phpbb_db_data:

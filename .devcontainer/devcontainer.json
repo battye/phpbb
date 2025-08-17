@@ -1,13 +1,10 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.238.1/containers/ubuntu
 {
-	"name": "Ubuntu",
-	"build": {
-		"dockerfile": "Dockerfile",
-		// Update 'VARIANT' to pick an Ubuntu version: jammy / ubuntu-22.04, focal / ubuntu-20.04, bionic /ubuntu-18.04
-		// Use ubuntu-22.04 or ubuntu-18.04 on local arm64/Apple Silicon.
-		"args": { "VARIANT": "ubuntu-22.04" }
-	},
+	"name": "Debian with PHP 8.4",
+	"dockerComposeFile": ["docker-compose.yml"],
+	"service": "phpbb_app",
+	"workspaceFolder": "/workspaces/phpbb",
 
 	// Configure tool-specific properties.
 	"customizations": {
@@ -19,12 +16,12 @@
 			},
 			//"devPort": {},
 			// Specify which VS Code extensions to install (List of IDs)
-			"extensions": ["xdebug.php-debug"]
+			"extensions": ["xdebug.php-debug", "GitHub.copilot", "GitHub.copilot-chat"]
 			}
 		},
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	"forwardPorts": [80, 9003],
+	"forwardPorts": [80, 9003, 3306],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
 	"postStartCommand": "bash .devcontainer/resources/setup.sh",

@@ -1,19 +1,28 @@
-# Debian version
-ARG VARIANT="buster"
-FROM mcr.microsoft.com/vscode/devcontainers/base:0-${VARIANT}
+FROM php:8.4-apache-bookworm
 
-# Install PHP
-RUN apt-get -y update
-RUN apt-get -y install php php-xml php-mbstring php-curl php-zip php-xdebug
+# Install system dependencies for PHP extensions
+RUN apt-get update && apt-get install -y \
+    libonig-dev \
+    libxml2-dev \
+    libcurl4-openssl-dev \
+    libzip-dev \
+    pkg-config \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install PHP extensions (if needed). Official PHP images do not use apt-get for PHP extensions
+# so we use docker-php-ext-install to compile and enable them.
+RUN docker-php-ext-install mbstring xml curl zip
+
+# Install Xdebug
+RUN pecl install xdebug \
+    && docker-php-ext-enable xdebug
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Install MySQL
-RUN apt-get -y install mysql-server php-mysql
-
-# Xdebug
-ADD resources/xdebug.ini /etc/php/8.1/apache2/conf.d/xdebug.ini
+# Xdebug config
+COPY resources/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
+RUN mkdir -p /var/log/xdebug && chmod 777 /var/log/xdebug
 
 # Configure Apache
 RUN echo "Listen 8080" >> /etc/apache2/ports.conf && \
