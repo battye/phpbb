@@ -9,6 +9,11 @@ RUN apt-get update && apt-get install -y \
     pkg-config \
     && rm -rf /var/lib/apt/lists/*
 
+RUN useradd -m -u 1000 vscode
+RUN groupadd -g 999 docker || true
+RUN usermod -aG docker vscode
+RUN apt-get update && apt-get install -y docker.io
+
 # Install PHP extensions (if needed). Official PHP images do not use apt-get for PHP extensions
 # so we use docker-php-ext-install to compile and enable them.
 RUN docker-php-ext-install mbstring xml curl zip
