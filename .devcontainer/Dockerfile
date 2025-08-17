@@ -32,3 +32,7 @@ RUN mkdir -p /var/log/xdebug && chmod 777 /var/log/xdebug
 # Configure Apache
 RUN echo "Listen 8080" >> /etc/apache2/ports.conf && \
     a2enmod rewrite
+
+COPY resources/setup.sh /usr/local/bin/phpbb-setup.sh
+RUN chmod +x /usr/local/bin/phpbb-setup.sh
+CMD ["/usr/local/bin/phpbb-setup.sh"]
