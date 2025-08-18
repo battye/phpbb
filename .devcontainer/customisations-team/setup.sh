@@ -8,7 +8,7 @@ sudo service mysql start
 
 # Start Apache
 echo "[Codespaces] Start Apache"
-sudo service apache2 start
+sudo apache2ctl start
 
 # Add SSH key
 # echo "[Codespaces] Add SSH key"
