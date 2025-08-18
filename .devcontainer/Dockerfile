@@ -1,6 +1,6 @@
-# Debian version
-ARG VARIANT="buster"
-FROM mcr.microsoft.com/vscode/devcontainers/base:0-${VARIANT}
+# Image version
+ARG VARIANT="bookworm"
+FROM mcr.microsoft.com/vscode/devcontainers/php:8.4-apache-${VARIANT}
 
 # Install PHP
 RUN apt-get -y update
