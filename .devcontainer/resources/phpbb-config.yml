@@ -30,7 +30,7 @@ installer:
         cookie_secure: false
         server_protocol: http://
         force_server_vars: true
-        server_name: localhost
+        server_name: automatic-goldfish-4gwpw6q673q994-80.app.github.dev
         server_port: 80
         script_path: /
 

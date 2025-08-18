@@ -1,5 +1,6 @@
-# setup.sh
+# setup.sh - Customisations Team
 # Commands to install and configure phpBB
+echo "[Codespaces] Customisations Team configuration..."
 
 # Start MySQL
 echo "[Codespaces] Start MySQL"
@@ -21,10 +22,6 @@ sudo mysql -u root<<EOFMYSQL
     CREATE DATABASE IF NOT EXISTS phpbb;
 EOFMYSQL
 
-# Download dependencies
-# echo "[Codespaces] Install Composer dependencies"
-# composer install --no-interaction
-
 # Symlink the webroot so it can be viewed
 echo "[Codespaces] Create Symlink of webroot"
 sudo rm -rf /var/www/html
@@ -38,10 +35,6 @@ if [ "$CODESPACES" = true ] ; then
     sed -i "s/localhost/$codespaces_url/g" /workspaces/phpbb/.devcontainer/resources/phpbb-config.yml
 fi
 
-# Copy phpBB config
-# echo "[Codespaces] Copy phpBB configuration"
-# cp /workspaces/phpbb/.devcontainer/resources/phpbb-config.yml /workspaces/phpbb/phpBB/install/install-config.yml
-
 # Install phpBB
 echo "[Codespaces] Run phpBB CLI installation"
 cd /workspaces/phpbb/phpBB && composer install --no-interaction
@@ -49,4 +42,4 @@ sudo php /workspaces/phpbb/phpBB/install/phpbbcli.php install /workspaces/phpbb/
 rm -rf /workspaces/phpbb/phpBB/install
 
 # Finished
-echo "[Codespaces] phpBB installation completed"
+echo "[Codespaces] phpBB (Customisation Team) installation completed"
