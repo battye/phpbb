@@ -10,6 +10,8 @@ RUN sudo apt-get update && \
     sudo sh -c 'echo "deb [signed-by=/usr/share/keyrings/deb.sury.org-php.gpg] https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list' && \
     sudo apt-get update
 
+RUN sudo rm -rf /var/lib/apt/lists/*
+
 RUN apt-get -y update && apt-get -y install \
     php8.4-xml \
     php8.4-mbstring \
