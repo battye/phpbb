@@ -11,17 +11,17 @@ RUN sudo apt-get update && \
     sudo apt-get update
 
 RUN apt-get -y update && apt-get -y install \
-    php-xml \
-    php-mbstring \
-    php-curl \
-    php-zip \
-    php-xdebug
+    php8.4-xml \
+    php8.4-mbstring \
+    php8.4-curl \
+    php8.4-zip \
+    php8.4-xdebug
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Install MySQL
-RUN apt-get -y install mysql-server php-mysql
+RUN apt-get -y install mysql-server php8.4-mysql
 
 # Xdebug
 ADD resources/xdebug.ini /etc/php/8.4/apache2/conf.d/xdebug.ini
