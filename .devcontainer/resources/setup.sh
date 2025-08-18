@@ -35,7 +35,7 @@ sudo ln -s /workspaces/phpbb/phpBB /var/www/html
 if [ "$CODESPACES" = true ] ; then
     echo "[Codespaces] Set the phpBB server name using default environment variables"
     codespaces_url="${CODESPACE_NAME}-80.${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}"
-    sed -i "s/localhost/$codespaces_url/g" /workspaces/phpbb/phpBB/install/install-config.yml
+    sed -i "s/localhost/$codespaces_url/g" /workspaces/phpbb/.devcontainer/resources/phpbb-config.yml
 fi
 
 # Copy phpBB config
