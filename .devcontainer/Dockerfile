@@ -1,4 +1,5 @@
 # Image version
+ARG VARIANT="bookworm"
 FROM mcr.microsoft.com/vscode/devcontainers/php:8.4-apache-${VARIANT}
 
 # Install PHP
