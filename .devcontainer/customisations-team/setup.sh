@@ -37,7 +37,7 @@ fi
 
 # Install Titania
 echo "[Codespaces] Install Titania"
-mdkir /workspaces/phpbb/phpBB/phpbb
+mkdir /workspaces/phpbb/phpBB/phpbb
 cd /workspaces/phpbb/phpBB/phpbb 
 git clone -b 3.3.x https://github.com/phpbb/customisation-db.git titania
 
