@@ -40,6 +40,8 @@ echo "[Codespaces] Install Titania"
 mkdir /workspaces/phpbb/phpBB/ext/phpbb
 cd /workspaces/phpbb/phpBB/ext/phpbb 
 git clone -b 3.3.x https://github.com/phpbb/customisation-db.git titania
+chmod 755 files store
+composer install --no-interaction
 
 # Install phpBB
 echo "[Codespaces] Run phpBB CLI installation"
