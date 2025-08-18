@@ -10,8 +10,8 @@ echo "[Codespaces] Start Apache"
 sudo service apache2 start
 
 # Add SSH key
-echo "[Codespaces] Add SSH key"
-echo "$SSH_KEY" > /home/vscode/.ssh/id_rsa && chmod 600 /home/vscode/.ssh/id_rsa
+# echo "[Codespaces] Add SSH key"
+# echo "$SSH_KEY" > /home/vscode/.ssh/id_rsa && chmod 600 /home/vscode/.ssh/id_rsa
 
 # Create a MySQL user to use
 echo "[Codespaces] Create MySQL user"
@@ -22,17 +22,13 @@ sudo mysql -u root<<EOFMYSQL
 EOFMYSQL
 
 # Download dependencies
-echo "[Codespaces] Install Composer dependencies"
-composer install --no-interaction
+# echo "[Codespaces] Install Composer dependencies"
+# composer install --no-interaction
 
 # Symlink the webroot so it can be viewed
 echo "[Codespaces] Create Symlink of webroot"
 sudo rm -rf /var/www/html
 sudo ln -s /workspaces/phpbb/phpBB /var/www/html
-
-# Copy phpBB config
-echo "[Codespaces] Copy phpBB configuration"
-cp /workspaces/phpbb/.devcontainer/resources/phpbb-config.yml /workspaces/phpbb/phpBB/install/install-config.yml
 
 # Force the server URL to reflect the Codespace
 # https://docs.github.com/en/codespaces/developing-in-a-codespace/default-environment-variables-for-your-codespace
@@ -42,10 +38,14 @@ if [ "$CODESPACES" = true ] ; then
     sed -i "s/localhost/$codespaces_url/g" /workspaces/phpbb/phpBB/install/install-config.yml
 fi
 
+# Copy phpBB config
+# echo "[Codespaces] Copy phpBB configuration"
+# cp /workspaces/phpbb/.devcontainer/resources/phpbb-config.yml /workspaces/phpbb/phpBB/install/install-config.yml
+
 # Install phpBB
 echo "[Codespaces] Run phpBB CLI installation"
 cd /workspaces/phpbb/phpBB && composer install --no-interaction
-sudo php /workspaces/phpbb/phpBB/install/phpbbcli.php install /workspaces/phpbb/phpBB/install/install-config.yml
+sudo php /workspaces/phpbb/phpBB/install/phpbbcli.php install /workspaces/phpbb/.devcontainer/resources/phpbb-config.yml
 rm -rf /workspaces/phpbb/phpBB/install
 
 # Finished
