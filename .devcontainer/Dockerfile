@@ -3,7 +3,7 @@ ARG VARIANT="bookworm"
 FROM mcr.microsoft.com/vscode/devcontainers/base:0-${VARIANT}
 
 # Install PHP
-RUN apt install software-properties-common 
+RUN apt-get -y install software-properties-common 
 RUN add-apt-repository ppa:ondrej/php
 RUN apt-get -y update
 RUN apt-get -y install php8.4 php8.4-xml php8.4-mbstring php8.4-curl php8.4-zip php8.4-xdebug
