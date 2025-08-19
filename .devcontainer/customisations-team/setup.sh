@@ -39,7 +39,7 @@ fi
 echo "[Codespaces] Install Titania"
 mkdir /workspaces/phpbb/phpBB/ext/phpbb
 cd /workspaces/phpbb/phpBB/ext/phpbb 
-git clone -b 3.3.x https://github.com/phpbb/customisation-db.git titania
+git clone -b 3.3.x-phpbb-codespaces https://github.com/battye/customisation-db.git titania
 cd /workspaces/phpbb/phpBB/ext/phpbb/titania
 chmod 755 files store
 composer install --no-interaction
