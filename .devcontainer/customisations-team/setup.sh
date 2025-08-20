@@ -35,20 +35,42 @@ if [ "$CODESPACES" = true ] ; then
     sed -i "s/localhost/$codespaces_url/g" /workspaces/phpbb/.devcontainer/customisations-team/phpbb-config.yml
 fi
 
-# Install Titania
-echo "[Codespaces] Install Titania"
-mkdir /workspaces/phpbb/phpBB/ext/phpbb
-cd /workspaces/phpbb/phpBB/ext/phpbb 
-git clone -b 3.3.x-phpbb-codespaces https://github.com/battye/customisation-db.git titania
-cd /workspaces/phpbb/phpBB/ext/phpbb/titania
-chmod 755 files store
-composer install --no-interaction
+URL_EPV="https://github.com/phpbb/epv"
+URL_TV="https://github.com/battye/phpbb-translation-validator"
+URL_TITANIA="https://github.com/battye/customisation-db.git"
 
 # Install phpBB
 echo "[Codespaces] Run phpBB CLI installation"
 cd /workspaces/phpbb/phpBB && composer install --no-interaction
 sudo php /workspaces/phpbb/phpBB/install/phpbbcli.php install /workspaces/phpbb/.devcontainer/customisations-team/phpbb-config.yml
 rm -rf /workspaces/phpbb/phpBB/install
+
+# Install Titania
+echo "[Codespaces] Install Titania"
+cd /workspaces/
+git clone -b 3.3.x-phpbb-codespaces $URL_TITANIA titania
+cd /workspaces/titania
+chmod 755 files store
+composer install --no-interaction
+sudo ln -s /workspaces/titania /workspaces/phpbb/phpBB/ext/phpbb/titania
+
+# Install EPV
+echo "[Codespaces] Install EPV"
+cd /workspaces/
+git clone -b master $URL_EPV epv
+cd /workspaces/epv
+composer install --no-interaction
+rm -rf /workspaces/phpbb/phpBB/ext/phpbb/titania/vendor/phpbb/epv
+sudo ln -s /workspaces/epv /workspaces/phpbb/phpBB/ext/phpbb/titania/vendor/phpbb/epv
+
+# Install Translation Validator
+echo "[Codespaces] Install Translation Validator"
+cd /workspaces/
+git clone -b master $URL_TV phpbb-translation-validator
+cd /workspaces/phpbb-translation-validator
+composer install --no-interaction
+rm -rf /workspaces/phpbb/phpBB/ext/phpbb/titania/vendor/phpbb/phpbb-translation-validator
+sudo ln -s /workspaces/phpbb-translation-validator /workspaces/phpbb/phpBB/ext/phpbb/titania/vendor/phpbb/phpbb-translation-validator
 
 # Finished
 echo "[Codespaces] phpBB (Customisation Team) installation completed"
