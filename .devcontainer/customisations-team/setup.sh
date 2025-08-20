@@ -68,11 +68,11 @@ sudo ln -s /workspaces/epv /workspaces/phpbb/phpBB/ext/phpbb/titania/vendor/phpb
 # Install Translation Validator
 echo "[Codespaces] Install Translation Validator"
 cd /workspaces/
-git clone -b master $URL_TV phpbb-translation-validator
-cd /workspaces/phpbb-translation-validator
+git clone -b master $URL_TV translation-validator
+cd /workspaces/translation-validator
 composer install --no-interaction
-rm -rf /workspaces/phpbb/phpBB/ext/phpbb/titania/vendor/phpbb/phpbb-translation-validator
-sudo ln -s /workspaces/phpbb-translation-validator /workspaces/phpbb/phpBB/ext/phpbb/titania/vendor/phpbb/phpbb-translation-validator
+rm -rf /workspaces/phpbb/phpBB/ext/phpbb/titania/vendor/phpbb/translation-validator
+sudo ln -s /workspaces/translation-validator /workspaces/phpbb/phpBB/ext/phpbb/titania/vendor/phpbb/translation-validator
 
 # Finished
 echo "[Codespaces] phpBB (Customisation Team) installation completed"
