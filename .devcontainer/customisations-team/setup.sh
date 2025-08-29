@@ -30,9 +30,10 @@ sudo ln -s /workspaces/phpbb/phpBB /var/www/html
 # Force the server URL to reflect the Codespace
 # https://docs.github.com/en/codespaces/developing-in-a-codespace/default-environment-variables-for-your-codespace
 if [ "$CODESPACES" = true ] ; then
-    echo "[Codespaces] Set the phpBB server name using default environment variables"
-    codespaces_url="${CODESPACE_NAME}-80.${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}"
-    sed -i "s/localhost/$codespaces_url/g" /workspaces/phpbb/.devcontainer/customisations-team/phpbb-config.yml
+    cp /workspaces/phpbb/.devcontainer/customisations-team/phpbb-config.yml /tmp/phpbb-config.yml
+    CODESPACES_URL="${CODESPACE_NAME}-80.${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}"
+    echo "[Codespaces] Set the phpBB server name using default environment variables: $CODESPACES_URL"
+    sed -i "s/localhost/$CODESPACES_URL/g" /tmp/phpbb-config.yml
 fi
 
 URL_EPV="https://github.com/phpbb/epv"
@@ -42,8 +43,14 @@ URL_TITANIA="https://github.com/battye/customisation-db.git"
 # Install phpBB
 echo "[Codespaces] Run phpBB CLI installation"
 cd /workspaces/phpbb/phpBB && composer install --no-interaction
-sudo php /workspaces/phpbb/phpBB/install/phpbbcli.php install /workspaces/phpbb/.devcontainer/customisations-team/phpbb-config.yml
+sudo php /workspaces/phpbb/phpBB/install/phpbbcli.php install /tmp/phpbb-config.yml
 rm -rf /workspaces/phpbb/phpBB/install
+
+# Set to debug mode
+sed -i \
+  -e "s|@define('PHPBB_ENVIRONMENT', 'production');|@define('PHPBB_ENVIRONMENT', 'development');|" \
+  -e "s|// *@define('DEBUG_CONTAINER', true);|@define('DEBUG_CONTAINER', true);|" \
+  /workspaces/phpbb/phpBB/config.php
 
 # Install Titania
 echo "[Codespaces] Install Titania"
