@@ -34,9 +34,10 @@ sudo ln -s /workspaces/phpbb/phpBB /var/www/html
 # Force the server URL to reflect the Codespace
 # https://docs.github.com/en/codespaces/developing-in-a-codespace/default-environment-variables-for-your-codespace
 if [ "$CODESPACES" = true ] ; then
-    echo "[Codespaces] Set the phpBB server name using default environment variables"
-    codespaces_url="${CODESPACE_NAME}-80.${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}"
-    sed -i "s/localhost/$codespaces_url/g" /workspaces/phpbb/.devcontainer/development-team/phpbb-config.yml
+    cp /workspaces/phpbb/.devcontainer/development-team/phpbb-config.yml /tmp/phpbb-config.yml
+    CODESPACES_URL="${CODESPACE_NAME}-80.${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}"
+    echo "[Codespaces] Set the phpBB server name using default environment variables: $CODESPACES_URL"
+    sed -i "s/localhost/$CODESPACES_URL/g" /tmp/phpbb-config.yml
 fi
 
 # Copy phpBB config
@@ -46,7 +47,7 @@ fi
 # Install phpBB
 echo "[Codespaces] Run phpBB CLI installation"
 cd /workspaces/phpbb/phpBB && composer install --no-interaction
-sudo php /workspaces/phpbb/phpBB/install/phpbbcli.php install /workspaces/phpbb/.devcontainer/developmenmt-team/phpbb-config.yml
+sudo php /workspaces/phpbb/phpBB/install/phpbbcli.php install /tmp/phpbb-config.yml
 rm -rf /workspaces/phpbb/phpBB/install
 
 # Finished
