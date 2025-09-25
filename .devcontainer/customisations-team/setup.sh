@@ -36,16 +36,16 @@ URL_EPV="https://github.com/phpbb/epv"
 URL_TV="https://github.com/battye/phpbb-translation-validator"
 URL_TITANIA="https://github.com/battye/customisation-db.git"
 
-# Install Titania
-echo "[Codespaces] Install Titania"
+# Install Oberon
+echo "[Codespaces] Install Oberon"
 cd /workspaces/
-git clone -b oberon $URL_TITANIA titania
-cd /workspaces/titania
+git clone -b oberon $URL_TITANIA oberon
+cd /workspaces/oberon
 chmod 755 files store
 composer install --no-interaction
 chmod 755 /workspaces/phpbb/phpBB/ext
 mkdir /workspaces/phpbb/phpBB/ext/phpbb
-sudo ln -s /workspaces/titania /workspaces/phpbb/phpBB/ext/phpbb/oberon
+sudo ln -s /workspaces/oberon /workspaces/phpbb/phpBB/ext/phpbb/oberon
 
 # Install EPV
 echo "[Codespaces] Install EPV"
