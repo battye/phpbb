@@ -34,4 +34,4 @@ installer:
         server_port: 80
         script_path: /
 
-    extensions: ["phpbb/titania"]
+    extensions: ["phpbb/oberon"]

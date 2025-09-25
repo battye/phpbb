@@ -20,8 +20,18 @@
 			//"devPort": {},
 			// Specify which VS Code extensions to install (List of IDs)
 			"extensions": ["xdebug.php-debug"]
-			}
 		},
+
+		"codespaces": {
+			"repositories": {
+				"battye/customisation-db": {
+					"permissions": {
+						"contents": "write"
+					}
+				}
+			}
+		}
+	},
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	"forwardPorts": [80, 9003],

@@ -45,7 +45,7 @@ chmod 755 files store
 composer install --no-interaction
 chmod 755 /workspaces/phpbb/phpBB/ext
 mkdir /workspaces/phpbb/phpBB/ext/phpbb
-sudo ln -s /workspaces/titania /workspaces/phpbb/phpBB/ext/phpbb/titania
+sudo ln -s /workspaces/titania /workspaces/phpbb/phpBB/ext/phpbb/oberon
 
 # Install EPV
 echo "[Codespaces] Install EPV"
