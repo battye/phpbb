@@ -33,8 +33,8 @@ if [ "$CODESPACES" = true ] ; then
 fi
 
 URL_EPV="https://github.com/phpbb/epv"
-URL_TV="https://github.com/phpbb/phpbb-translation-validator"
-URL_TITANIA="https://github.com/phpbb/customisation-db.git"
+URL_TV="https://github.com/battye/phpbb-translation-validator"
+URL_TITANIA="https://github.com/battye/customisation-db.git"
 
 # Install Titania
 echo "[Codespaces] Install Titania"
