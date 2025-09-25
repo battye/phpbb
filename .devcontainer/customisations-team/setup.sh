@@ -36,7 +36,7 @@ URL_EPV="https://github.com/phpbb/epv"
 URL_TV="https://github.com/battye/phpbb-translation-validator"
 URL_TITANIA="https://github.com/battye/customisation-db.git"
 
-# Install Oberon
+# Install Oberon (change later to sudo ln -s instead of mv)
 echo "[Codespaces] Install Oberon"
 cd /workspaces/
 git clone -b oberon $URL_TITANIA oberon
@@ -45,7 +45,7 @@ chmod 755 files store
 composer install --no-interaction
 chmod 755 /workspaces/phpbb/phpBB/ext
 mkdir /workspaces/phpbb/phpBB/ext/phpbb
-sudo ln -s /workspaces/oberon /workspaces/phpbb/phpBB/ext/phpbb/oberon
+mv /workspaces/oberon /workspaces/phpbb/phpBB/ext/phpbb/oberon
 
 # Install EPV
 echo "[Codespaces] Install EPV"
