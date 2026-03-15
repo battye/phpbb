@@ -3,7 +3,6 @@
 {
 	"name": "phpBB (Customisations Team)",
 	"build": {
-		"context": "..",
 		"dockerfile": "Dockerfile",
 		"args": { 
 			"VARIANT": "ubuntu-22.04"
