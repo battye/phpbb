@@ -3,7 +3,8 @@
 {
 	"name": "phpBB (Customisations Team)",
 	"build": {
-		"dockerfile": "../Dockerfile",
+		"context": "..",
+		"dockerfile": "Dockerfile",
 		"args": { 
 			"VARIANT": "ubuntu-22.04"
 		}
@@ -42,6 +43,6 @@
 	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "vscode",
 	"features": {
-		"github-cli": "latest"
+		"ghcr.io/devcontainers/features/github-cli:1": {}
 	}
 }
